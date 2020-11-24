@@ -9,7 +9,7 @@ from .parameters import *
 # Open Data Endpoint Configuration
 ####
 COUNTRY_CODE = 'IT'
-CITY_NAME = 'Bari'
+CITY_NAME = 'Roma'
 POLLUTANT = POLLUTANT_TYPE['PM10']
 YEAR_FROM = 2020
 YEAR_TO = 2020
@@ -43,6 +43,9 @@ def retrieve_csv_data(csv_url):
 
     samples = []
     for row in reader:
+        if row['Concentration'] == '':
+            continue
+
         samples.append({
             'value': float(row['Concentration']),
             'unit': row['UnitOfMeasurement'],
